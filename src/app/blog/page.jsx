@@ -1,33 +1,38 @@
 import React from 'react'
 import styles from './blog.module.css'
 import PostCard from '@/components/postCard/PostCard'
+import { getPosts } from '@/lib/data'
 
-export default function BlogPage () {
-  const testPost = {
-    img: 'https://images.pexels.com/photos/18254876/pexels-photo-18254876/free-photo-of-waves-by-the-rocky-beach.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    createdAt: 'createdAt',
-    title: 'title',
-    body: 'body',
-    post: 'slug'
-  }
+// const getData = async () => {
+//   // Use no-store if your data is updated frequently
+//   // const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
+//   //   cache: 'no-store'
+//   // })
+
+//   // Use revalidate to refresh every specified interval
+//   const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
+//     next: { revalidate: 3600 }
+//   })
+
+//   if (!res.ok) {
+//     throw new error('Something went wrong')
+//   }
+
+//   return res.json()
+// }
+
+export default async function BlogPage () {
+  // const posts = await getData()
+
+  const posts = await getPosts()
 
   return (
     <div className={styles.container}>
-      <div className={styles.post}>
-        <PostCard post={testPost} />
-      </div>
-      <div className={styles.post}>
-        <PostCard post={testPost} />
-      </div>
-      <div className={styles.post}>
-        <PostCard post={testPost} />
-      </div>
-      <div className={styles.post}>
-        <PostCard post={testPost} />
-      </div>
-      <div className={styles.post}>
-        <PostCard post={testPost} />
-      </div>
+      {posts.map(post => (
+        <div className={styles.post} key={post.id}>
+          <PostCard post={post} />
+        </div>
+      ))}
     </div>
   )
 }
