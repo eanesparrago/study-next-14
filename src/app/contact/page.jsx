@@ -5,8 +5,6 @@ import styles from './contact.module.css'
 import Image from 'next/image'
 
 export default function ContactPage () {
-  console.log('works here')
-
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>

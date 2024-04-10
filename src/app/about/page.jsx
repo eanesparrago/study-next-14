@@ -3,6 +3,10 @@ import React from 'react'
 
 import styles from './about.module.css'
 
+export const metadata = {
+  title: 'About'
+}
+
 export default function AboutPage () {
   return (
     <div className={styles.container}>

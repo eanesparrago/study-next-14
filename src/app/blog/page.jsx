@@ -21,6 +21,10 @@ import { getPosts } from '@/lib/data'
 //   return res.json()
 // }
 
+export const metadata = {
+  title: 'Blog'
+}
+
 export default async function BlogPage () {
   // const posts = await getData()
 

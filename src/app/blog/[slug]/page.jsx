@@ -15,11 +15,23 @@ import { getPost } from '@/lib/data'
 //   return res.json()
 // }
 
+export const generateMetadata = async ({ params }) => {
+  const { slug } = params
+
+  const post = await getPost(slug)
+
+  return {
+    title: post.title,
+    description: post.desc
+  }
+}
+
 export default async function SingleBlogPage ({ params }) {
   const { slug } = params
 
   // const post = await getData(slug)
 
+  // FYI: Next will only fetch getPost once even if you have multiple fetch calls
   const post = await getPost(slug)
 
   return (
