@@ -5,15 +5,15 @@ import PostUser from '@/components/postUser/postUser'
 import { getPost } from '@/lib/data'
 
 // Fetch data with an API
-// const getData = async slug => {
-//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`)
+const getData = async slug => {
+  const res = await fetch(`http://localhost:3000/api/blog/${slug}`)
 
-//   if (!res.ok) {
-//     throw new error('Something went wrong')
-//   }
+  if (!res.ok) {
+    throw new error('Something went wrong')
+  }
 
-//   return res.json()
-// }
+  return res.json()
+}
 
 export const generateMetadata = async ({ params }) => {
   const { slug } = params
@@ -29,10 +29,10 @@ export const generateMetadata = async ({ params }) => {
 export default async function SingleBlogPage ({ params }) {
   const { slug } = params
 
-  // const post = await getData(slug)
+  const post = await getData(slug)
 
   // FYI: Next will only fetch getPost once even if you have multiple fetch calls
-  const post = await getPost(slug)
+  // const post = await getPost(slug)
 
   return (
     <div className={styles.container}>

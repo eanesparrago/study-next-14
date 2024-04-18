@@ -5,8 +5,9 @@ import React, { useState } from 'react'
 
 import styles from './links.module.css'
 import NavLink from './navLink/NavLink'
+import { handleLogout } from '@/lib/actions'
 
-function Links () {
+function Links ({ session }) {
   const [open, setOpen] = useState(true)
 
   const links = [
@@ -29,7 +30,6 @@ function Links () {
   ]
 
   // TEMPORARY
-  const session = true
   const isAdmin = true
 
   return (
@@ -40,10 +40,15 @@ function Links () {
           <NavLink item={link} key={link.title} />
         ))}
 
-        {session ? (
+        {session?.user ? (
           <>
-            {isAdmin && <NavLink item={{ title: 'Admin', path: '/admin' }} />}
-            <button className={styles.logOut}>Log Out</button>
+            {session.user?.isAdmin && (
+              <NavLink item={{ title: 'Admin', path: '/admin' }} />
+            )}
+
+            <form action={handleLogout}>
+              <button className={styles.logOut}>Log Out</button>
+            </form>
           </>
         ) : (
           <NavLink item={{ title: 'Login', path: '/login' }} />
